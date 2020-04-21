@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>d8714af4-ab78-49ad-aac4-3a68f9ac5c05</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <WebBrowserUrl>http://127.0.0.1</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+    <Name>notebookOnWeb</Name>
+    <RootNamespace>notebookOnWeb</RootNamespace>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <InterpreterId>MSBuild|notebookOnWeb-env|$(MSBuildProjectFullPath)</InterpreterId>
+    <WebBrowserPort>5000</WebBrowserPort>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="notebookOnWeb\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="notebookOnWeb\config.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runserver.py" />
+    <Compile Include="notebookOnWeb\__init__.py" />
+    <Compile Include="notebookOnWeb\views.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="notebookOnWeb\" />
+    <Folder Include="notebookOnWeb\static\" />
+    <Folder Include="notebookOnWeb\static\content\" />
+    <Folder Include="notebookOnWeb\static\fonts\" />
+    <Folder Include="notebookOnWeb\static\scripts\" />
+    <Folder Include="notebookOnWeb\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="notebookOnWeb\static\content\bootstrap.css" />
+    <Content Include="notebookOnWeb\static\content\bootstrap.min.css" />
+    <Content Include="notebookOnWeb\static\content\site.css" />
+    <Content Include="notebookOnWeb\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="notebookOnWeb\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="notebookOnWeb\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="notebookOnWeb\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="notebookOnWeb\static\scripts\bootstrap.js" />
+    <Content Include="notebookOnWeb\static\scripts\bootstrap.min.js" />
+    <Content Include="notebookOnWeb\static\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="notebookOnWeb\static\scripts\jquery-1.10.2.js" />
+    <Content Include="notebookOnWeb\static\scripts\jquery-1.10.2.min.js" />
+    <Content Include="notebookOnWeb\static\scripts\jquery-1.10.2.min.map" />
+    <Content Include="notebookOnWeb\static\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="notebookOnWeb\static\scripts\jquery.validate.js" />
+    <Content Include="notebookOnWeb\static\scripts\jquery.validate.min.js" />
+    <Content Include="notebookOnWeb\static\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="notebookOnWeb\static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="notebookOnWeb\static\scripts\modernizr-2.6.2.js" />
+    <Content Include="notebookOnWeb\static\scripts\respond.js" />
+    <Content Include="notebookOnWeb\static\scripts\respond.min.js" />
+    <Content Include="notebookOnWeb\static\scripts\_references.js" />
+    <Content Include="notebookOnWeb\templates\index.html" />
+    <Content Include="notebookOnWeb\templates\base.html" />
+    <Content Include="notebookOnWeb\templates\login.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\notebookOnWeb-env\">
+      <Id>notebookOnWeb-env</Id>
+      <Version>3.8</Version>
+      <Description>notebookOnWeb-env (Python 3.8 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
