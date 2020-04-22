@@ -340,8 +340,5 @@ ASALocalRun/
 healthchecksdb
 
 # Virtual environment
-<<<<<<< HEAD
 notebookOnWeb-env/
-=======
-notebookOnWeb-env/
->>>>>>> 865d86fa724809960d68f22fae696784973eca53
+
