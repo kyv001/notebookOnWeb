@@ -5,12 +5,19 @@
         {{form.hidden_tag()}}
         <p>
             {{form.username.label}} {{form.username()}}
+            {% for error in form.username.errors %}
+                <br /><span style="color: red;">{{ error }}</span>
+            {% endfor %}
         </p>
         <p>
             {{form.userpass.label}} {{form.userpass()}}
+            {% for error in form.userpass.errors %}
+                <br /><span style="color: red;">{{ error }}</span>
+            {% endfor %}
         </p>
         <p>
             {{form.submit}}
         </p>
     </form>
+    <p>没有账号？去<a href="/logon">注册</a></p>
 {% endblock %}
