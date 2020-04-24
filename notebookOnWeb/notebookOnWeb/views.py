@@ -41,8 +41,6 @@ def login():
     if loginform.validate_on_submit():
         cursor.execute("SELECT pswdhash FROM users WHERE name = ?",(loginform.username.data,))
         res = cursor.fetchone() or [None]
-        print(res)
-        print(str(hash(loginform.userpass.data)))
         if res[0] == str(hash(loginform.userpass.data)):
             session['usr'] = loginform.username.data
             return redirect(url_for("home"))
