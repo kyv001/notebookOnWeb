@@ -4,14 +4,20 @@
     <form action="" method="post">
         {{form.hidden_tag()}}
         <p>
-            {{form.username.label}} {{form.username()}}
-            {% for error in form.username.errors %}
+            {{form.title.label}} {{form.title()}}
+            {% for error in form.title.errors %}
             <br /><span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
         <p>
-            {{form.userpass.label}} {{form.userpass()}}
-            {% for error in form.userpass.errors %}
+            {{form.note.label}} {{form.note()}}
+            {% for error in form.title.errors %}
+            <br /><span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form.public.label}} {{form.public()}}
+            {% for error in form.public.errors %}
             <br /><span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
@@ -19,5 +25,4 @@
             {{form.submit}}
         </p>
     </form>
-<p>没有账号？去<a href="/logon">注册</a></p>
 {% endblock %}

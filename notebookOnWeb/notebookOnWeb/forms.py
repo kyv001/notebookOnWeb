@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField
+from wtforms import StringField,PasswordField,SubmitField,TextAreaField,RadioField
 from wtforms.validators import Length,DataRequired,EqualTo
 
 class loginForm(FlaskForm):
@@ -43,3 +43,22 @@ class logonForm(FlaskForm):
         ]
     )
     submit = SubmitField("注册")
+
+class editForm(FlaskForm):
+    title = StringField(
+        "标题",
+        validators=[
+            Length(min=1,max=20,message="标题不能大于20字！"),
+            DataRequired(message="不能上传空标题！")
+        ]
+    )
+    note = TextAreaField(
+        "正文",
+        validators=[
+            Length(min=1,max=400,message="笔记不能大于400字！"),
+            DataRequired(message="不能上传空笔记！")
+        ]
+    )
+    public = RadioField('是否对别人可见？', choices=[('1', '是'), ('0', '否')],
+                                  validators=[DataRequired("请选择！")])
+    submit = SubmitField("上传")
