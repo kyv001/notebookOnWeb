@@ -15,7 +15,7 @@ try:
         """
         CREATE TABLE users(
             name        CHAR(10) PRIMARY KEY    NOT NULL,
-            password    CHAR(12)                NOT NULL
+            pswdhash    CHAR(40)                NOT NULL
         );
         """
     )
@@ -39,12 +39,15 @@ def toHome(): # go back home
 def login():
     loginform = loginForm()
     if loginform.validate_on_submit():
-        cursor.execute("SELECT password FROM users WHERE name = ?",(loginform.username.data,))
-        if cursor.fetchone()[0] == loginform.userpass.data:
+        cursor.execute("SELECT pswdhash FROM users WHERE name = ?",(loginform.username.data,))
+        res = cursor.fetchone() or [None]
+        print(res)
+        print(str(hash(loginform.userpass.data)))
+        if res[0] == str(hash(loginform.userpass.data)):
             session['usr'] = loginform.username.data
             return redirect(url_for("home"))
         else:
-            return render_template('login.html',title='密码错误，请重新登陆',form=loginform)
+            return render_template('login.html',title='用户名或密码错误，请重新登陆',form=loginform)
     return render_template('login.html',title='登录',form=loginform)
 
 @app.route('/logon',methods=['GET','POST'])
@@ -54,7 +57,7 @@ def logon():
         session['usr'] = logonform.username.data
         cursor.execute("INSERT INTO users VALUES (?,?)",(
             logonform.username.data,
-            logonform.userpass.data))
+            hash(logonform.userpass.data)))
         conn.commit()
         return redirect(url_for("home"))
     return render_template('logon.html',title='注册',form=logonform)
