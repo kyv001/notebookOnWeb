@@ -55,6 +55,10 @@ def logon():
     logonform = logonForm()
     if logonform.validate_on_submit():
         session['usr'] = logonform.username.data
+        cursor.execute("SELECT pswdhash FROM users WHERE name = ?",
+                          (logonform.username.data,))
+        if cursor.fetchone():
+            return render_template('logon.html',title='用户名已存在',form=logonform)
         cursor.execute("INSERT INTO users VALUES (?,?)",(
             logonform.username.data,
             hash(logonform.userpass.data)))
