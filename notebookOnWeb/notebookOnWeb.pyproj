@@ -76,6 +76,7 @@
     <Content Include="notebookOnWeb\templates\index.html" />
     <Content Include="notebookOnWeb\templates\base.html" />
     <Content Include="notebookOnWeb\templates\login.html" />
+    <Content Include="notebookOnWeb\templates\shownotes.html" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="..\notebookOnWeb-env\">

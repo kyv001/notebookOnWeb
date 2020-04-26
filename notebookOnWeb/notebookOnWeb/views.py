@@ -39,11 +39,11 @@ except Exception as e:print(e)
 @app.route('/home')
 def home():
     cursor.execute("SELECT topic FROM notes WHERE name=? OR public=1",(session.get('usr'),))
-    topics = cursor.fetchall()
-    print(topics)
+    topics = list(set(cursor.fetchall()))
     return render_template(
         'index.html',
-        usr=session.get('usr')
+        usr=session.get('usr'),
+        topics=topics
     )
 
 @app.route('/')
@@ -100,3 +100,9 @@ def logon():
 def logout():
     session.pop('usr',None)
     return redirect(url_for('home'))
+
+@app.route('/shownotes/<topic>')
+def shownotes(topic):
+    cursor.execute("SELECT name,note FROM notes WHERE topic=? AND (name=? OR public=1)",(topic,session.get('usr')))
+    notes = cursor.fetchall()
+    return render_template('shownotes.html',title='主题为{}的笔记'.format(topic),notes=notes)

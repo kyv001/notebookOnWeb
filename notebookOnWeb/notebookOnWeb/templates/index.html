@@ -1,1 +1,9 @@
 {% extends "base.html" %}
+
+{% block body %}
+<ul>
+{% for topic in topics %}
+    <li><a href={{url_for("shownotes",topic=topic[0])}}>{{topic[0]}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

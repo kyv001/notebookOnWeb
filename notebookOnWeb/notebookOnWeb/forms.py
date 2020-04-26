@@ -45,11 +45,11 @@ class logonForm(FlaskForm):
     submit = SubmitField("注册")
 
 class editForm(FlaskForm):
-    title = StringField(
-        "标题",
+    topic = StringField(
+        "主题",
         validators=[
-            Length(min=1,max=20,message="标题不能大于20字！"),
-            DataRequired(message="不能上传空标题！")
+            Length(min=1,max=20,message="主题不能大于20字！"),
+            DataRequired(message="不能上传空主题！")
         ]
     )
     note = TextAreaField(
