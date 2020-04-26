@@ -4,14 +4,14 @@
     <form action="" method="post">
         {{form.hidden_tag()}}
         <p>
-            {{form.title.label}} {{form.title()}}
-            {% for error in form.title.errors %}
+            {{form.topic.label}} {{form.topic()}}
+            {% for error in form.topic.errors %}
             <br /><span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
         <p>
             {{form.note.label}} {{form.note()}}
-            {% for error in form.title.errors %}
+            {% for error in form.note.errors %}
             <br /><span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>

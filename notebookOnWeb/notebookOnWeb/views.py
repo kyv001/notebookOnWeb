@@ -6,6 +6,7 @@ from flask import \
 import sqlite3
 from notebookOnWeb.forms import *
 from notebookOnWeb import app
+import hashlib
 
 conn = sqlite3.connect("data.db",check_same_thread=False)
 cursor = conn.cursor()
@@ -20,10 +21,12 @@ try:
         """
     )
     conn.commit()
+except Exception as e:print(e)
+try:
     cursor.execute(
         """
         CREATE TABLE notes(
-            title   CHAR(20)    NOT NULL,
+            topic   CHAR(20)    NOT NULL,
             name    CHAR(10)    NOT NULL,
             note    CHAR(400)   NOT NULL,
             public  INTEGER     NOT NULL
@@ -35,6 +38,9 @@ except Exception as e:print(e)
 
 @app.route('/home')
 def home():
+    cursor.execute("SELECT topic FROM notes WHERE name=? OR public=1",(session.get('usr'),))
+    topics = cursor.fetchall()
+    print(topics)
     return render_template(
         'index.html',
         usr=session.get('usr')
@@ -52,7 +58,7 @@ def login():
     if loginform.validate_on_submit():
         cursor.execute("SELECT pswdhash FROM users WHERE name = ?",(loginform.username.data,))
         res = cursor.fetchone() or [None]
-        if res[0] == str(hash(loginform.userpass.data)):
+        if res[0] == hashlib.md5(bytes(loginform.userpass.data,encoding='utf-8')).hexdigest():
             session['usr'] = loginform.username.data
             return redirect(url_for("home"))
         else:
@@ -66,7 +72,7 @@ def edit():
         return redirect(url_for("login"))
     if editform.validate_on_submit():
         cursor.execute("INSERT INTO notes VALUES (?,?,?,?)",(
-            editform.title.data,
+            editform.topic.data,
             session['usr'],
             editform.note.data,
             editform.public.data))
@@ -84,7 +90,7 @@ def logon():
             return render_template('logon.html',title='用户名已存在',form=logonform)
         cursor.execute("INSERT INTO users VALUES (?,?)",(
             logonform.username.data,
-            hash(logonform.userpass.data)))
+            hashlib.md5(bytes(logonform.userpass.data,encoding='utf-8')).hexdigest()))
         conn.commit()
         session['usr'] = logonform.username.data
         return redirect(url_for("home"))

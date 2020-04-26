@@ -26,6 +26,7 @@
 <a href={{url_for("home")}}>主页面</a>
 {% if usr %}
 <a href={{url_for("logout")}}>注销</a>
+<a href={{url_for("edit")}}>写笔记</a>
 {% else %}
 <a href={{url_for("login")}}>登录</a>
 {% endif %}
