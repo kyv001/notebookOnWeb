@@ -62,8 +62,14 @@ def login():
             session['usr'] = loginform.username.data
             return redirect(url_for("home"))
         else:
-            return render_template('login.html',title='用户名或密码错误，请重新登陆',form=loginform)
-    return render_template('login.html',title='登录',form=loginform)
+            return render_template('login.html',
+                                   title='用户名或密码错误，请重新登陆',
+                                   form=loginform,
+                                   usr=session.get('usr'))
+    return render_template('login.html',
+                           title='登录',
+                           form=loginform,
+                           usr=session.get('usr'))
 
 @app.route('/edit',methods=['GET','POST'])
 def edit():
@@ -78,7 +84,10 @@ def edit():
             editform.public.data))
         conn.commit()
         return redirect(url_for("home"))
-    return render_template('editnotes.html',title='写下你的想法',form=editform)
+    return render_template('editnotes.html',
+                           title='写下你的想法',
+                           form=editform,
+                           usr=session.get('usr'))
 
 @app.route('/logon',methods=['GET','POST'])
 def logon():
@@ -87,14 +96,20 @@ def logon():
         cursor.execute("SELECT pswdhash FROM users WHERE name = ?",
                           (logonform.username.data,))
         if cursor.fetchone():
-            return render_template('logon.html',title='用户名已存在',form=logonform)
+            return render_template('logon.html',
+                                   title='用户名已存在',
+                                   form=logonform,
+                                   usr=session.get('usr'))
         cursor.execute("INSERT INTO users VALUES (?,?)",(
             logonform.username.data,
             hashlib.md5(bytes(logonform.userpass.data,encoding='utf-8')).hexdigest()))
         conn.commit()
         session['usr'] = logonform.username.data
         return redirect(url_for("home"))
-    return render_template('logon.html',title='注册',form=logonform)
+    return render_template('logon.html',
+                           title='注册',
+                           form=logonform,
+                           usr=session.get('usr'))
 
 @app.route('/logout',methods=['GET','POST'])
 def logout():
@@ -103,6 +118,10 @@ def logout():
 
 @app.route('/shownotes/<topic>')
 def shownotes(topic):
-    cursor.execute("SELECT name,note FROM notes WHERE topic=? AND (name=? OR public=1)",(topic,session.get('usr')))
+    cursor.execute("SELECT name,note FROM notes WHERE topic=? AND (name=? OR public=1)",
+                   (topic,session.get('usr')))
     notes = cursor.fetchall()
-    return render_template('shownotes.html',title='主题为{}的笔记'.format(topic),notes=notes)
+    return render_template('shownotes.html',
+                           title='主题为{}的笔记'.format(topic),
+                           notes=notes,
+                           usr=session.get('usr'))
