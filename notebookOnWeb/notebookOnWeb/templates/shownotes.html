@@ -6,7 +6,7 @@
     <li>
         <hr />
         <p>作者：{{note[0]}}</p>
-        <p>正文：{{note[1]}}</p>
+        <p>正文：{{note[1]|safe}}</p>
     </li>
     {% endfor %}
 </ul>
