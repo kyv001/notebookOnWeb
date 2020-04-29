@@ -55,7 +55,7 @@ class editForm(FlaskForm):
     note = TextAreaField(
         "正文",
         validators=[
-            Length(min=1,max=400,message="笔记不能大于400字！"),
+            Length(min=1,max=400,message="笔记不能大于1000字！"),
             DataRequired(message="不能上传空笔记！")
         ]
     )

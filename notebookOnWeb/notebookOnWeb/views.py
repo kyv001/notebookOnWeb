@@ -28,7 +28,7 @@ try:
         CREATE TABLE notes(
             topic   CHAR(20)    NOT NULL,
             name    CHAR(10)    NOT NULL,
-            note    CHAR(400)   NOT NULL,
+            note    CHAR(1000)   NOT NULL,
             public  INTEGER     NOT NULL
         );
         """
