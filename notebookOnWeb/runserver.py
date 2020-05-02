@@ -1,5 +1,5 @@
 import sys
-if '' in sys.path:
+if '' not in sys.path:
     sys.path.append(".")
 
 from notebookOnWeb import app
