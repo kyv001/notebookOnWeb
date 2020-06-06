@@ -26,10 +26,11 @@ try:
     cursor.execute(
         """
         CREATE TABLE notes(
-            topic   CHAR(20)    NOT NULL,
-            name    CHAR(10)    NOT NULL,
-            note    CHAR(1000)   NOT NULL,
-            public  INTEGER     NOT NULL
+            topic    CHAR(20)    NOT NULL,
+            name     CHAR(10)    NOT NULL,
+            note     CHAR(1000)  NOT NULL,
+            notehash CHAR(40)    NOT NULL,
+            public   INTEGER     NOT NULL
         );
         """
     )
@@ -77,10 +78,11 @@ def edit():
     if not session.get('usr'):
         return redirect(url_for("login"))
     if editform.validate_on_submit():
-        cursor.execute("INSERT INTO notes VALUES (?,?,?,?)",(
+        cursor.execute("INSERT INTO notes VALUES (?,?,?,?,?)",(
             editform.topic.data,
             session['usr'],
-            editform.note.data,
+            "<br />".join(editform.note.data.split("\n")),
+            hashlib.md5(bytes("<br />".join(editform.note.data.split("\n")),encoding='utf-8')).hexdigest(),
             editform.public.data))
         conn.commit()
         return redirect(url_for("home"))
@@ -88,6 +90,12 @@ def edit():
                            title='写下你的想法',
                            form=editform,
                            usr=session.get('usr'))
+
+@app.route('/del/<hash_>',methods=['GET','POST'])
+def delete(hash_):
+    cursor.execute("DELETE FROM notes WHERE notehash = ?",(hash_,))
+    conn.commit()
+    return redirect(url_for("home"))
 
 @app.route('/logon',methods=['GET','POST'])
 def logon():
@@ -124,4 +132,6 @@ def shownotes(topic):
     return render_template('shownotes.html',
                            title='主题为{}的笔记'.format(topic),
                            notes=notes,
-                           usr=session.get('usr'))
+                           usr=session.get('usr'),
+                           hashlib=hashlib,
+                           bytes=bytes)
