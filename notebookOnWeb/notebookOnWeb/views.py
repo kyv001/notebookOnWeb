@@ -28,7 +28,7 @@ try:
         CREATE TABLE notes(
             topic    CHAR(20)    NOT NULL,
             name     CHAR(10)    NOT NULL,
-            note     CHAR(1000)  NOT NULL,
+            note     CHAR(20000) NOT NULL,
             notehash CHAR(40)    NOT NULL,
             public   INTEGER     NOT NULL
         );
