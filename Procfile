@@ -1,1 +1,1 @@
-python notebookOnWeb/runserver.py
+web: python notebookOnWeb/runserver.py
