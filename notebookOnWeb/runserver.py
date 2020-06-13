@@ -3,5 +3,6 @@ if '' not in sys.path:
     sys.path.append(".")
 
 from notebookOnWeb import app
-
-app.run()
+from os import environ
+port = int(environ.get('PORT',5000))
+app.run(port=port)
