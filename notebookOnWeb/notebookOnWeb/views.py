@@ -81,8 +81,8 @@ def edit():
         cursor.execute("INSERT INTO notes VALUES (?,?,?,?,?)",(
             editform.topic.data,
             session['usr'],
-            "<br />".join(editform.note.data.split("\n")),
-            hashlib.md5(bytes("<br />".join(editform.note.data.split("\n")),encoding='utf-8')).hexdigest(),
+            editform.note.data,
+            hashlib.md5(bytes(editform.note.data,encoding='utf-8')).hexdigest(),
             editform.public.data))
         conn.commit()
         return redirect(url_for("home"))
