@@ -6,9 +6,9 @@
     <li>
         <hr />
         <p>作者：{{note[0]}}</p>
-        <p>正文：{{note[1]|safe}}</p>
+        <p>正文：{{note[1]}}</p>
         {% if usr == note[0] %}
-            <a href="/del/{{hashlib.md5(bytes(note[1],encoding='utf-8')).hexdigest()}}">删除</a>
+            <a href="//del/{{hashlib.md5(bytes(note[1],encoding='utf-8')).hexdigest()}}">删除</a>
         {% endif %}
     </li>
     {% endfor %}
